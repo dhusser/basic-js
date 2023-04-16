@@ -18,7 +18,7 @@ function calculateHanoi(disksNumber, turnsSpeed) {
   const numberOfTurns = Math.pow(2, disksNumber) - 1,
         time = Math.floor((numberOfTurns / turnsSpeed) * 3600);
 
-        return {"turns": numberOfTurns, "seconds": time}
+  return {"turns": numberOfTurns, "seconds": time}
 }
 
 module.exports = {
