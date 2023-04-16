@@ -23,20 +23,22 @@ const { NotImplementedError } = require('../extensions/index.js');
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(matrix) {
-const rows = matrix.length,
-      columns = matrix[0].length,
-      result = [];
 
-  for (let row in rows) {
+function minesweeper(matrix) {
+  const rows = matrix.length,
+        columns = matrix[0].length,
+        result = [],
+        offsets = [-1, 0, 1];
+  
+  for (let row = 0; row < rows; row++) {
     const newRow = [];
-    for (let column in columns) {
+    for (let col = 0; col < columns; col++) {
       let count = 0;
-      for (let i = row - 1; i <= row + 1; i++) {
-        for (let j = column - 1; j <= column + 1; j++) {
-          if (i >= 0 && i < rows && j >= 0 && j < columns && !(i === row && j === col)) {
-            count += matrix[i][j];
-          }
+      for (let rowOffset of offsets) {
+        for (let colOffset of offsets) {
+          const r = row + rowOffset,
+                c = col + colOffset;
+          if (r >= 0 && r < rows && c >= 0 && c < columns && !(rowOffset === 0 && colOffset === 0)) count += matrix[r][c];
         }
       }
       newRow.push(count);
